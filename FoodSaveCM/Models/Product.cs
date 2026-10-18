@@ -44,4 +44,5 @@ public class Product : ObservableObject
     public string DistanceText => $"{Distance:0.0} km";
     public string ShopLine => $"🏪 {Shop}  ·  📍 {Address}  ·  {DistanceText}";
     public string StockText => Stock <= 0 ? "⛔ Épuisé" : Stock <= 3 ? $"🔥 Plus que {Stock} disponible(s) !" : $"✅ {Stock} disponibles";
+    public string Statut => HasDiscount ? "Anti-Gaspi" : "Normal";
 }

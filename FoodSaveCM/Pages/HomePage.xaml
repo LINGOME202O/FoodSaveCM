@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="FoodSaveCM.Pages.HomePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:FoodSaveCM.Controls"
+             Shell.NavBarIsVisible="False" Title="Accueil"
+             Style="{StaticResource PageStyle}">
+    <Grid RowDefinitions="Auto,*" Padding="16,12,16,0">
+        <VerticalStackLayout Spacing="12">
+            <Label x:Name="Hello" Style="{StaticResource BigTitle}" FontSize="30" />
+            <Label Text="Que recherches-tu pour aujourd'hui ?" Style="{StaticResource Muted}" HorizontalOptions="Center" />
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <Border Style="{StaticResource FieldBorder}" HeightRequest="44">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Label Text="🔍" VerticalOptions="Center" Margin="12,0,0,0" />
+                        <Entry x:Name="SearchEntry" Grid.Column="1" Placeholder="rechercher des produits, des boissons"
+                               BackgroundColor="Transparent" FontSize="13" TextChanged="OnSearch"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                    </Grid>
+                </Border>
+                <Button Grid.Column="1" Text="⚙" FontSize="18" Padding="0" WidthRequest="48" HeightRequest="44"
+                        CornerRadius="12" BackgroundColor="{StaticResource Brand}" TextColor="White" Clicked="OnFilter" />
+            </Grid>
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Text="Catégories" Style="{StaticResource SectionTitle}" />
+                <Label Grid.Column="1" Text="Voir tout &gt;" TextColor="{StaticResource Leaf}" FontSize="16" VerticalOptions="Center">
+                    <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnAllCategories" /></Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                <HorizontalStackLayout x:Name="Chips" Spacing="8" />
+            </ScrollView>
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Text="Produits populaires" Style="{StaticResource SectionTitle}" />
+                <Label Grid.Column="1" Text="Voir tout" TextColor="{StaticResource Leaf}" FontSize="16" VerticalOptions="Center">
+                    <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnSeeAll" /></Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </VerticalStackLayout>
+
+        <CollectionView x:Name="List" Grid.Row="1" Margin="0,4,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate><ctrl:ProductCard /></DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <Label Text="Aucun produit trouvé 😕" Style="{StaticResource Muted}" HorizontalOptions="Center" Margin="0,40" />
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </Grid>
+</ContentPage>

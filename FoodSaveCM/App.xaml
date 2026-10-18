@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FoodSaveCM.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Color x:Key="Brand">#009B4D</Color>
+            <Color x:Key="Leaf">#34C759</Color>
+            <Color x:Key="SoftGreen">#E8F8EC</Color>
+
+            <Style x:Key="PageStyle" TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#121212}" />
+            </Style>
+
+            <Style x:Key="BigTitle" TargetType="Label">
+                <Setter Property="FontSize" Value="34" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}" />
+            </Style>
+
+            <Style x:Key="SectionTitle" TargetType="Label">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}" />
+            </Style>
+
+            <Style x:Key="Muted" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=#8E8E93, Dark=#A0A0A8}" />
+            </Style>
+
+            <Style x:Key="Body" TargetType="Label">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}" />
+            </Style>
+
+            <Style x:Key="Card" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#F2F2F7, Dark=#1E1E22}" />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="Padding" Value="12" />
+                <Setter Property="StrokeShape">
+                    <Setter.Value><RoundRectangle CornerRadius="16" /></Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="FieldBorder" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#F2F2F7, Dark=#2C2C2E}" />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="HeightRequest" Value="48" />
+                <Setter Property="StrokeShape">
+                    <Setter.Value><RoundRectangle CornerRadius="14" /></Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="Chip" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{StaticResource SoftGreen}" />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="Padding" Value="12,6" />
+                <Setter Property="StrokeShape">
+                    <Setter.Value><RoundRectangle CornerRadius="20" /></Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="PrimaryButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Brand}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="17" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="HeightRequest" Value="52" />
+            </Style>
+
+            <Style x:Key="SoftButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#F2F2F7, Dark=#2C2C2E}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="HeightRequest" Value="50" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

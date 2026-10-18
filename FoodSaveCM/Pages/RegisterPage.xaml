@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="FoodSaveCM.Pages.RegisterPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:FoodSaveCM.Controls"
+             Shell.NavBarIsVisible="False" Title="Inscription"
+             Style="{StaticResource PageStyle}">
+    <ScrollView>
+        <VerticalStackLayout Padding="28,36" Spacing="12">
+            <Label Text="Inscription" Style="{StaticResource BigTitle}" FontSize="36" Margin="0,0,0,12" />
+
+            <ctrl:Field x:Name="NameField" Caption="Nom complet" Placeholder="Entrez votre nom" />
+            <ctrl:Field x:Name="EmailField" Caption="Email" Placeholder="exemple@email.com" KeyboardType="Email" />
+            <ctrl:Field x:Name="PassField" Caption="Mot de passe" Placeholder="entrez votre mot de passe" IsPassword="True" />
+            <ctrl:Field x:Name="ConfirmField" Caption="Confirmer mot de passe" Placeholder="confirmez" IsPassword="True" />
+
+            <Label x:Name="ErrorLabel" TextColor="#D32F2F" FontSize="13" IsVisible="False" HorizontalTextAlignment="Center" />
+
+            <Button Text="S'inscrire" Style="{StaticResource PrimaryButton}" Margin="0,16,0,0" Clicked="OnRegister" />
+
+            <Label Text="Déjà un compte ?" Style="{StaticResource Body}" HorizontalOptions="Center" Margin="0,10,0,0" />
+            <Label Text="Se connecter" TextColor="{StaticResource Leaf}" FontSize="18" FontAttributes="Bold"
+                   TextDecorations="Underline" HorizontalOptions="Center">
+                <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnLogin" /></Label.GestureRecognizers>
+            </Label>
+            <Label Text="🍀" HorizontalOptions="Center" FontSize="28" Margin="0,16,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

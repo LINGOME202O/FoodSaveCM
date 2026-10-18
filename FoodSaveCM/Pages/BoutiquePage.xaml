@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="FoodSaveCM.Pages.BoutiquePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:FoodSaveCM.Controls"
+             Shell.NavBarIsVisible="False" Title="Boutique"
+             Style="{StaticResource PageStyle}">
+    <Grid RowDefinitions="Auto,*" Padding="16,12,16,0">
+        <VerticalStackLayout Spacing="10">
+            <Label Text="Paniers anti-gaspi" Style="{StaticResource BigTitle}" FontSize="28" />
+            <Label Text="Sauvez de la nourriture à prix réduit" Style="{StaticResource Muted}" HorizontalOptions="Center" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button Text="🗺 Carte des commerces" Style="{StaticResource SoftButton}" FontSize="13" HeightRequest="44" Clicked="OnShops" />
+                <Button Grid.Column="1" Text="↕ Trier" Style="{StaticResource SoftButton}" FontSize="13" HeightRequest="44" Clicked="OnSort" />
+            </Grid>
+            <Label x:Name="CountLabel" Style="{StaticResource Muted}" />
+        </VerticalStackLayout>
+
+        <CollectionView x:Name="List" Grid.Row="1">
+            <CollectionView.ItemTemplate>
+                <DataTemplate><ctrl:ProductCard /></DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <Label Text="Aucun panier disponible pour le moment" Style="{StaticResource Muted}" HorizontalOptions="Center" Margin="0,40" />
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </Grid>
+</ContentPage>

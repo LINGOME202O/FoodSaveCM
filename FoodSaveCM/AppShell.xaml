@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="FoodSaveCM.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:pages="clr-namespace:FoodSaveCM.Pages"
+       FlyoutBehavior="Disabled"
+       Shell.TabBarBackgroundColor="{AppThemeBinding Light=#E5E5EA, Dark=#1C1C1E}"
+       Shell.TabBarForegroundColor="{StaticResource Brand}"
+       Shell.TabBarTitleColor="{StaticResource Brand}"
+       Shell.TabBarUnselectedColor="Gray">
+
+    <ShellContent Route="login" ContentTemplate="{DataTemplate pages:LoginPage}" />
+    <ShellContent Route="register" ContentTemplate="{DataTemplate pages:RegisterPage}" />
+
+    <TabBar Route="main">
+        <Tab Title="Accueil" Route="home" Icon="tab_accueil.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" />
+        </Tab>
+        <Tab Title="Boutique" Route="boutique" Icon="tab_boutique.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:BoutiquePage}" />
+        </Tab>
+        <Tab Title="Carte" Route="cart" Icon="tab_carte.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:CartPage}" />
+        </Tab>
+        <Tab Title="Favoris" Route="favoris" Icon="tab_favoris.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:FavorisPage}" />
+        </Tab>
+        <Tab Title="Profil" Route="profil" Icon="tab_profil.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" />
+        </Tab>
+    </TabBar>
+</Shell>

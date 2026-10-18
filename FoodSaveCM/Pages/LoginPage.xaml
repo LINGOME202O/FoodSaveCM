@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="FoodSaveCM.Pages.LoginPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:FoodSaveCM.Controls"
+             Shell.NavBarIsVisible="False" Title="Connexion"
+             Style="{StaticResource PageStyle}">
+    <ScrollView>
+        <VerticalStackLayout Padding="28,36" Spacing="14">
+            <Label Text="🍀 FoodSaveCM" TextColor="{StaticResource Leaf}" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Connexion" Style="{StaticResource BigTitle}" FontSize="38" Margin="0,40,0,0" />
+            <Label Text="Connectez-vous pour réduire le gaspillage alimentaire" Style="{StaticResource Muted}"
+                   HorizontalTextAlignment="Center" Margin="0,0,0,24" />
+
+            <ctrl:Field x:Name="EmailField" Caption="Email" Placeholder="exemple@email.com" KeyboardType="Email" />
+            <ctrl:Field x:Name="PassField" Caption="Mot de passe" Placeholder="entrez votre mot de passe" IsPassword="True" />
+
+            <Label x:Name="ErrorLabel" TextColor="#D32F2F" FontSize="13" IsVisible="False" HorizontalTextAlignment="Center" />
+
+            <Button Text="Se connecter" Style="{StaticResource PrimaryButton}" Margin="0,16,0,0" Clicked="OnLogin" />
+
+            <Label Text="Mot de passe oublié ?" TextColor="{StaticResource Leaf}" HorizontalOptions="Center">
+                <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnForgot" /></Label.GestureRecognizers>
+            </Label>
+
+            <Label Text="Pas encore de compte ?" Style="{StaticResource Body}" HorizontalOptions="Center" />
+            <Label Text="S'inscrire" TextColor="{StaticResource Leaf}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnRegister" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="🍀🍀🍀" HorizontalOptions="Center" FontSize="22" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

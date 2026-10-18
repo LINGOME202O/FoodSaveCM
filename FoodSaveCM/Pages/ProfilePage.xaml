@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="FoodSaveCM.Pages.ProfilePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="False" Title="Profil"
+             Style="{StaticResource PageStyle}">
+    <ScrollView>
+        <VerticalStackLayout Padding="18,12,18,24" Spacing="12">
+            <Border StrokeThickness="0" HeightRequest="120" StrokeShape="RoundRectangle 60">
+                <Image Source="profil.jpg" Aspect="AspectFill" />
+            </Border>
+
+            <Border Style="{StaticResource Card}" Padding="14">
+                <Label x:Name="NameLabel" Style="{StaticResource Body}" FontAttributes="Bold" FontSize="17" HorizontalOptions="Center" />
+            </Border>
+
+            <!-- Impact écologique -->
+            <Label Text="🌍 Mon impact" Style="{StaticResource SectionTitle}" Margin="0,6,0,0" />
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                <Border Style="{StaticResource Chip}" Padding="8,12">
+                    <VerticalStackLayout>
+                        <Label x:Name="MealsLabel" FontSize="22" FontAttributes="Bold" TextColor="#1B5E20" HorizontalOptions="Center" />
+                        <Label Text="repas sauvés" FontSize="11" TextColor="#1B5E20" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource Chip}" Padding="8,12">
+                    <VerticalStackLayout>
+                        <Label x:Name="Co2Label" FontSize="22" FontAttributes="Bold" TextColor="#1B5E20" HorizontalOptions="Center" />
+                        <Label Text="kg CO₂ évités*" FontSize="11" TextColor="#1B5E20" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource Chip}" Padding="8,12">
+                    <VerticalStackLayout>
+                        <Label x:Name="MoneyLabel" FontSize="18" FontAttributes="Bold" TextColor="#1B5E20" HorizontalOptions="Center" />
+                        <Label Text="FCFA économisés" FontSize="11" TextColor="#1B5E20" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+            <Label Text="*Estimation indicative (≈ 2,5 kg CO₂e par repas sauvé)." Style="{StaticResource Muted}" FontSize="10" />
+
+            <Button Text="MES RESERVATIONS" Style="{StaticResource SoftButton}" Clicked="OnReservations" Margin="0,6,0,0" />
+            <Button Text="MES PUBLICATIONS" Style="{StaticResource SoftButton}" Clicked="OnPublications" />
+            <Button Text="＋ PUBLIER UN INVENDU" Style="{StaticResource PrimaryButton}" FontSize="15" HeightRequest="50" Clicked="OnPublish" />
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="🌙 Mode sombre" Style="{StaticResource Body}" VerticalOptions="Center" />
+                        <Switch x:Name="DarkSwitch" Grid.Column="1" OnColor="{StaticResource Brand}" Toggled="OnDarkToggled" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="🔔 Alertes nouveaux invendus" Style="{StaticResource Body}" VerticalOptions="Center" />
+                        <Switch x:Name="NotifSwitch" Grid.Column="1" OnColor="{StaticResource Brand}" Toggled="OnNotifToggled" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Se déconnecter" BackgroundColor="Transparent" TextColor="#D32F2F" FontAttributes="Bold" Clicked="OnLogout" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

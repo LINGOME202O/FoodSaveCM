@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="FoodSaveCM.Pages.FavorisPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:FoodSaveCM.Controls"
+             Shell.NavBarIsVisible="False" Title="Favoris"
+             Style="{StaticResource PageStyle}">
+    <Grid RowDefinitions="Auto,*" Padding="16,12,16,0">
+        <Label Text="Mes favoris ❤️" Style="{StaticResource BigTitle}" FontSize="30" Margin="0,0,0,8" />
+        <CollectionView x:Name="List" Grid.Row="1">
+            <CollectionView.ItemTemplate>
+                <DataTemplate><ctrl:ProductCard /></DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Margin="0,60" Spacing="10">
+                    <Label Text="🤍" FontSize="60" HorizontalOptions="Center" />
+                    <Label Text="Aucun favori pour l'instant" Style="{StaticResource SectionTitle}" HorizontalOptions="Center" />
+                    <Label Text="Appuyez sur le cœur d'un produit pour le retrouver ici." Style="{StaticResource Muted}"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </Grid>
+</ContentPage>

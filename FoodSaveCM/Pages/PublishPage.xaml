@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="FoodSaveCM.Pages.PublishPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:FoodSaveCM.Controls"
+             Title="Publier" Style="{StaticResource PageStyle}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,8,20,28" Spacing="12">
+            <Label Text="Publier un invendu" Style="{StaticResource BigTitle}" FontSize="30" />
+            <Label Text="Remplissez les détails pour publier votre invendu" Style="{StaticResource Muted}" HorizontalOptions="Center" />
+
+            <ctrl:Field x:Name="NameField" Caption="Nom du panier" Placeholder="Ex : Panier de légumes frais" />
+            <ctrl:Field x:Name="DescField" Caption="Description" Placeholder="Ex : Tomates, courgettes....." />
+
+            <Label Text="Catégorie" Style="{StaticResource Body}" />
+            <Border Style="{StaticResource FieldBorder}">
+                <Picker x:Name="CategoryPicker" Title="Choisir une catégorie" Margin="8,0" BackgroundColor="Transparent"
+                        TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <ctrl:Field x:Name="QtyField" Caption="Quantité" Placeholder="Ex : 3 Paniers" KeyboardType="Numeric" />
+                <ctrl:Field x:Name="OldPriceField" Grid.Column="1" Caption="Prix d'origine" Placeholder="Ex : 3000 FCFA" KeyboardType="Numeric" />
+            </Grid>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <ctrl:Field x:Name="PriceField" Caption="Prix réduit" Placeholder="Ex : 1800 FCFA" KeyboardType="Numeric" />
+                <ctrl:Field x:Name="SlotField" Grid.Column="1" Caption="Créneau de retrait" Placeholder="Aujourd'hui 17h-19h" />
+            </Grid>
+
+            <Label x:Name="DiscountPreview" Style="{StaticResource Muted}" HorizontalOptions="Center" />
+
+            <Border Style="{StaticResource Card}" HeightRequest="190" Margin="0,6">
+                <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnPhoto" /></Border.GestureRecognizers>
+                <Grid>
+                    <VerticalStackLayout x:Name="PhotoHint" VerticalOptions="Center" Spacing="6">
+                        <Label Text="📷" FontSize="48" HorizontalOptions="Center" />
+                        <Label Text="Ajouter une photo du panier" Style="{StaticResource Body}" FontAttributes="Bold" HorizontalOptions="Center" />
+                        <Label Text="PNG, JPG jusqu'à 5 Mo" Style="{StaticResource Muted}" FontSize="12" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                    <Image x:Name="Preview" Aspect="AspectFill" IsVisible="False" />
+                </Grid>
+            </Border>
+
+            <Label x:Name="ErrorLabel" TextColor="#D32F2F" FontSize="13" IsVisible="False" HorizontalTextAlignment="Center" />
+            <Button Text="Publier maintenant" Style="{StaticResource PrimaryButton}" Clicked="OnPublish" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

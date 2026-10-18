@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="FoodSaveCM.Pages.DetailPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Détail" Style="{StaticResource PageStyle}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Partager" Clicked="OnShare" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <VerticalStackLayout Padding="20,12,20,28" Spacing="12">
+            <Grid>
+                <Border StrokeThickness="0" HeightRequest="230" StrokeShape="RoundRectangle 20">
+                    <Image Source="{Binding Image}" Aspect="AspectFill" />
+                </Border>
+                <Border BackgroundColor="#CCFFFFFF" StrokeThickness="0" HorizontalOptions="End" VerticalOptions="Start"
+                        Margin="10" Padding="10,6" StrokeShape="RoundRectangle 20">
+                    <Label Text="{Binding HeartIcon}" FontSize="22" />
+                    <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnFav" /></Border.GestureRecognizers>
+                </Border>
+            </Grid>
+
+            <Label Text="{Binding Name}" Style="{StaticResource BigTitle}" FontSize="30" HorizontalTextAlignment="Center" />
+            <Label Text="{Binding ShopLine}" Style="{StaticResource Muted}" HorizontalTextAlignment="Center" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="14">
+                <Label Text="{Binding PriceText}" TextColor="{StaticResource Leaf}" FontSize="22" FontAttributes="Bold" VerticalOptions="Center" />
+                <Label Text="{Binding OldPriceText}" IsVisible="{Binding HasDiscount}" TextDecorations="Strikethrough"
+                       Style="{StaticResource Muted}" VerticalOptions="Center" />
+                <Border IsVisible="{Binding HasDiscount}" BackgroundColor="{StaticResource Brand}" StrokeThickness="0"
+                        Padding="14,6" StrokeShape="RoundRectangle 4">
+                    <Label Text="{Binding DiscountText}" TextColor="White" FontAttributes="Bold" FontSize="17" />
+                </Border>
+            </HorizontalStackLayout>
+            <Label Text="{Binding StockText}" Style="{StaticResource Body}" HorizontalOptions="Center" FontAttributes="Bold" />
+
+            <Label x:Name="DescTitle" Text="Description" Style="{StaticResource SectionTitle}" Margin="0,8,0,0" />
+            <Label Text="{Binding Description}" Style="{StaticResource Body}" />
+
+            <VerticalStackLayout x:Name="ContentsBox" Spacing="4">
+                <Label Text="Contenu du panier" Style="{StaticResource SectionTitle}" Margin="0,8,0,4" />
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Contents}" Spacing="2">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding ., StringFormat='• {0}'}" Style="{StaticResource Body}" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <Label Text="Créneau de retrait" Style="{StaticResource SectionTitle}" Margin="0,8,0,0" />
+            <HorizontalStackLayout Spacing="10">
+                <Border Style="{StaticResource Chip}"><Label Text="{Binding PickupText}" TextColor="#1B5E20" FontSize="13" /></Border>
+                <Border Style="{StaticResource Chip}"><Label Text="Retrait sur place" TextColor="#1B5E20" FontSize="13" /></Border>
+            </HorizontalStackLayout>
+            <Label x:Name="CountdownLabel" Style="{StaticResource Body}" TextColor="#E65100" FontAttributes="Bold" />
+
+            <Button Text="Réserver ce panier" Style="{StaticResource PrimaryButton}" Margin="0,12,0,0" Clicked="OnReserve" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button Text="🛒 Ajouter au panier" Style="{StaticResource SoftButton}" FontSize="14" Clicked="OnAddToCart" />
+                <Button Grid.Column="1" Text="📍 Itinéraire" Style="{StaticResource SoftButton}" FontSize="14" Clicked="OnRoute" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

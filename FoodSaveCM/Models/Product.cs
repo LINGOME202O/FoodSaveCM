@@ -7,6 +7,7 @@ public class Product : ObservableObject
     public string Details { get; set; } = "";        // ex : "Frais . 500g . Juteux"
     public string Description { get; set; } = "";
     public string Image { get; set; } = "";
+    // Fonctionnalitée ajoutée 1 - Favoris : permet de sauvegarder les invendus préférés pour les retrouver vite et éviter le gaspillage
     public string Category { get; set; } = "";
     public decimal Price { get; set; }
     public decimal OldPrice { get; set; }

@@ -1,3 +1,4 @@
+// Fonctionnalitée ajoutée 3 - Alerte nouveaux invendus : notification quand un commercant publie un nouveau lot anti-gaspillage à proximité
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Security.Cryptography;

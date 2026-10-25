@@ -5,7 +5,7 @@
              xmlns:ctrl="clr-namespace:FoodSaveCM.Controls"
              Shell.NavBarIsVisible="False" Title="Boutique"
              Style="{StaticResource PageStyle}">
-    <Grid RowDefinitions="Auto,*" Padding="16,12,16,0">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="16,12,8,0">
         <VerticalStackLayout Spacing="10">
             <Label Text="Paniers anti-gaspi" Style="{StaticResource BigTitle}" FontSize="28" />
             <Label Text="Sauvez de la nourriture à prix réduit" Style="{StaticResource Muted}" HorizontalOptions="Center" />
@@ -16,7 +16,7 @@
             <Label x:Name="CountLabel" Style="{StaticResource Muted}" />
         </VerticalStackLayout>
 
-        <CollectionView x:Name="List" Grid.Row="1">
+        <CollectionView x:Name="List" Grid.Row="1" ItemSizingStrategy="MeasureFirstItem">
             <CollectionView.ItemTemplate>
                 <DataTemplate><ctrl:ProductCard /></DataTemplate>
             </CollectionView.ItemTemplate>
@@ -24,5 +24,6 @@
                 <Label Text="Aucun panier disponible pour le moment" Style="{StaticResource Muted}" HorizontalOptions="Center" Margin="0,40" />
             </CollectionView.EmptyView>
         </CollectionView>
+        <ctrl:NavBar Grid.Row="2" Current="Boutique" />
     </Grid>
 </ContentPage>

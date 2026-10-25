@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="FoodSaveCM.Pages.DashboardPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Tableau de bord" Style="{StaticResource PageStyle}">
+    <ScrollView>
+        <VerticalStackLayout Padding="22,12,22,28" Spacing="12">
+            <Label Text="Tableau de bord commerçant" Style="{StaticResource BigTitle}" FontSize="24" HorizontalTextAlignment="Center" />
+            <Label Text="Vos ventes d'invendus et votre impact" Style="{StaticResource Muted}" HorizontalOptions="Center" />
+
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10" Margin="0,8,0,0">
+                <Border Style="{StaticResource Chip}" Padding="8,16">
+                    <VerticalStackLayout>
+                        <Label x:Name="PublishedLabel" FontSize="28" FontAttributes="Bold" TextColor="#1B5E20" HorizontalOptions="Center" />
+                        <Label Text="invendus publiés" FontSize="12" TextColor="#1B5E20" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource Chip}" Padding="8,16">
+                    <VerticalStackLayout>
+                        <Label x:Name="ReservationsLabel" FontSize="28" FontAttributes="Bold" TextColor="#1B5E20" HorizontalOptions="Center" />
+                        <Label Text="réservations" FontSize="12" TextColor="#1B5E20" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="1" Style="{StaticResource Chip}" Padding="8,16">
+                    <VerticalStackLayout>
+                        <Label x:Name="PendingLabel" FontSize="28" FontAttributes="Bold" TextColor="#1B5E20" HorizontalOptions="Center" />
+                        <Label Text="à retirer" FontSize="12" TextColor="#1B5E20" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource Chip}" Padding="8,16">
+                    <VerticalStackLayout>
+                        <Label x:Name="PickedLabel" FontSize="28" FontAttributes="Bold" TextColor="#1B5E20" HorizontalOptions="Center" />
+                        <Label Text="retraits validés" FontSize="12" TextColor="#1B5E20" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource Card}" Margin="0,6,0,0">
+                <VerticalStackLayout Spacing="6">
+                    <Label x:Name="RevenueLabel" Style="{StaticResource Body}" FontAttributes="Bold" FontSize="17" />
+                    <Label x:Name="OnlineLabel" Style="{StaticResource Body}" FontSize="14" />
+                    <Label x:Name="RatingLabel" Style="{StaticResource Body}" FontSize="14" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Produits les plus réservés" Style="{StaticResource SectionTitle}" FontSize="17" Margin="0,8,0,0" />
+            <Border Style="{StaticResource Card}">
+                <Label x:Name="TopLabel" Style="{StaticResource Body}" FontSize="14" />
+            </Border>
+
+            <Button Text="Valider un retrait" Style="{StaticResource PrimaryButton}" Margin="0,10,0,0" Clicked="OnValidate" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

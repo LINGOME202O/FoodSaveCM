@@ -16,9 +16,14 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("confirmation", typeof(ConfirmationPage));
         Routing.RegisterRoute("publications", typeof(PublicationsPage));
         Routing.RegisterRoute("shops", typeof(ShopsPage));
+        Routing.RegisterRoute("validate", typeof(ValidatePickupPage));
+        Routing.RegisterRoute("payment", typeof(PaymentPage));
+        Routing.RegisterRoute("dashboard", typeof(DashboardPage));
 
         // Connexion automatique si la session est déjà ouverte
         if (AppState.IsLoggedIn)
             Dispatcher.Dispatch(async () => await GoToAsync("//main/home"));
+        else if (!Preferences.Get("onboarded", false))
+            Dispatcher.Dispatch(async () => await GoToAsync("//onboarding"));
     }
 }

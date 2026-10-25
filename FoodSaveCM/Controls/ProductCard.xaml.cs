@@ -21,9 +21,4 @@ public partial class ProductCard : ContentView
         if (AppState.AddToCart(P)) await Ui.Show($"{P.Name} ajouté au panier 🛒");
         else await Ui.Show("Ce produit est épuisé");
     }
-
-    void OnFav(object? sender, TappedEventArgs e)
-    {
-        if (P != null) AppState.ToggleFavorite(P);
-    }
 }

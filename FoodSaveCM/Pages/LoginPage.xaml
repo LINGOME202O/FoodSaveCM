@@ -5,31 +5,39 @@
              xmlns:ctrl="clr-namespace:FoodSaveCM.Controls"
              Shell.NavBarIsVisible="False" Title="Connexion"
              Style="{StaticResource PageStyle}">
-    <ScrollView>
-        <VerticalStackLayout Padding="28,36" Spacing="14">
-            <Label Text="🍀 FoodSaveCM" TextColor="{StaticResource Leaf}" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
-            <Label Text="Connexion" Style="{StaticResource BigTitle}" FontSize="38" Margin="0,40,0,0" />
-            <Label Text="Connectez-vous pour réduire le gaspillage alimentaire" Style="{StaticResource Muted}"
-                   HorizontalTextAlignment="Center" Margin="0,0,0,24" />
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout Padding="26,24,26,10" Spacing="0">
+                <Label Text="🍀 FoodSaveCM" TextColor="{StaticResource Leaf}" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" />
+                <Label Text="Connexion" Style="{StaticResource BigTitle}" FontSize="36" Margin="0,44,0,0" />
+                <Label Text="Connectez-vous pour réduire le gaspillage alimentaire" Style="{StaticResource Muted}" FontSize="13"
+                       HorizontalTextAlignment="Center" Margin="0,16,0,0" />
 
-            <ctrl:Field x:Name="EmailField" Caption="Email" Placeholder="exemple@email.com" KeyboardType="Email" />
-            <ctrl:Field x:Name="PassField" Caption="Mot de passe" Placeholder="entrez votre mot de passe" IsPassword="True" />
+                <ctrl:Field x:Name="EmailField" Caption="Email" CaptionSize="14" CaptionMargin="42,0,0,0"
+                            Placeholder="exemple@email.com" KeyboardType="Email" FieldHeight="46" Margin="0,70,0,0" />
+                <ctrl:Field x:Name="PassField" Caption="Mot de passe" CaptionSize="14" CaptionMargin="40,0,0,0"
+                            Placeholder="entrez votre mot de passe" IsPassword="True" FieldHeight="46" Margin="0,22,0,0" />
 
-            <Label x:Name="ErrorLabel" TextColor="#D32F2F" FontSize="13" IsVisible="False" HorizontalTextAlignment="Center" />
+                <Label x:Name="ErrorLabel" TextColor="#D32F2F" FontSize="13" IsVisible="False" HorizontalTextAlignment="Center" Margin="0,10,0,0" />
 
-            <Button Text="Se connecter" Style="{StaticResource PrimaryButton}" Margin="0,16,0,0" Clicked="OnLogin" />
+                <Button Text="Se connecter" Style="{StaticResource PrimaryButton}" FontSize="18" HeightRequest="48" CornerRadius="8"
+                        Margin="16,34,16,0" Clicked="OnLogin" />
 
-            <Label Text="Mot de passe oublié ?" TextColor="{StaticResource Leaf}" HorizontalOptions="Center">
-                <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnForgot" /></Label.GestureRecognizers>
-            </Label>
+                <Label Text="Mot de passe oublié ?" TextColor="{StaticResource Leaf}" FontSize="14" HorizontalOptions="Center" Margin="0,16,0,0">
+                    <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnForgot" /></Label.GestureRecognizers>
+                </Label>
 
-            <Label Text="Pas encore de compte ?" Style="{StaticResource Body}" HorizontalOptions="Center" />
-            <Label Text="S'inscrire" TextColor="{StaticResource Leaf}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnRegister" />
-                </Label.GestureRecognizers>
-            </Label>
-            <Label Text="🍀🍀🍀" HorizontalOptions="Center" FontSize="22" />
-        </VerticalStackLayout>
-    </ScrollView>
+                <Label Text="Pas encore de compte ?" Style="{StaticResource Body}" FontSize="14" HorizontalOptions="Center" Margin="0,14,0,0" />
+                <Label Text="S'inscrire" TextColor="{StaticResource Leaf}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,10,0,0">
+                    <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnRegister" /></Label.GestureRecognizers>
+                </Label>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto,*" ColumnSpacing="10" Padding="20,6,20,18">
+            <BoxView HeightRequest="1.5" Color="#444444" VerticalOptions="Center" />
+            <Label Grid.Column="1" Text="🍀🍀🍀" FontSize="20" />
+            <BoxView Grid.Column="2" HeightRequest="1.5" Color="#444444" VerticalOptions="Center" />
+        </Grid>
+    </Grid>
 </ContentPage>

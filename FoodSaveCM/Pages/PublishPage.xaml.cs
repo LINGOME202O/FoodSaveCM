@@ -11,22 +11,12 @@ public partial class PublishPage : ContentPage
     public PublishPage()
     {
         InitializeComponent();
-        CategoryPicker.ItemsSource = new[] { "Croissant", "Légumes", "Fruits", "Boisson", "Autre" };
-        CategoryPicker.SelectedIndex = 1;
-        PriceField.PropertyChanged += (_, e) => { if (e.PropertyName == nameof(PriceField.Text)) UpdatePreview(); };
-        OldPriceField.PropertyChanged += (_, e) => { if (e.PropertyName == nameof(OldPriceField.Text)) UpdatePreview(); };
     }
 
     static decimal Money(string? s)
     {
         var digits = Regex.Replace(s ?? "", @"[^\d]", "");
         return decimal.TryParse(digits, out var v) ? v : 0;
-    }
-
-    void UpdatePreview()
-    {
-        var o = Money(OldPriceField.Text); var p = Money(PriceField.Text);
-        DiscountPreview.Text = o > 0 && p > 0 && p < o ? $"💡 Réduction affichée : - {Math.Round((1 - p / o) * 100)} %" : "";
     }
 
     async void OnPhoto(object? sender, TappedEventArgs e)
@@ -72,7 +62,7 @@ public partial class PublishPage : ContentPage
             Details = "Publié par vous",
             Description = string.IsNullOrWhiteSpace(DescField.Text) ? "Invendu à sauver !" : DescField.Text.Trim(),
             Image = _photoPath ?? "pain.jpg",
-            Category = CategoryPicker.SelectedItem as string ?? "Autre",
+            Category = "Paniers", ShopSub = "Invendus du jour",
             Price = price, OldPrice = oldP,
             Shop = $"Boutique de {AppState.FirstName}",
             Address = "Douala", Lat = 4.0511, Lon = 9.7043, Distance = 0.5,

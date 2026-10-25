@@ -4,33 +4,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="Réservation" Style="{StaticResource PageStyle}">
     <ScrollView>
-        <VerticalStackLayout Padding="24,12,24,28" Spacing="14">
-            <Border BackgroundColor="{StaticResource SoftGreen}" StrokeThickness="0" WidthRequest="90" HeightRequest="90"
+        <VerticalStackLayout Padding="30,6,30,28" Spacing="0">
+            <Border BackgroundColor="#D9D9D9" StrokeThickness="0" WidthRequest="90" HeightRequest="90"
                     StrokeShape="RoundRectangle 45" HorizontalOptions="Center">
-                <Label Text="✔" FontSize="46" TextColor="{StaticResource Brand}" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Text="✔" FontSize="50" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" />
             </Border>
-            <Label Text="Réservation confirmée !" Style="{StaticResource BigTitle}" FontSize="28" TextColor="{StaticResource Brand}" />
-            <ProgressBar Progress="1" ProgressColor="{StaticResource Leaf}" HeightRequest="8" />
+            <Label Text="Réservation&#10;confirmée !" TextColor="#8E8E93" FontSize="30" FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" Margin="0,10,0,0" />
 
-            <Border BackgroundColor="White" StrokeThickness="0" Padding="12" HorizontalOptions="Center" StrokeShape="RoundRectangle 16">
-                <Image x:Name="QrImage" WidthRequest="190" HeightRequest="190" />
+            <BoxView Color="{StaticResource Leaf}" HeightRequest="16" CornerRadius="8" Margin="0,22,0,0" />
+
+            <Border BackgroundColor="White" StrokeThickness="0" Padding="6" HorizontalOptions="Center" Margin="0,30,0,0">
+                <Image x:Name="QrImage" WidthRequest="120" HeightRequest="120" />
             </Border>
-            <Label Text="{Binding Code, StringFormat='Code de retrait : {0}'}" Style="{StaticResource Body}" FontAttributes="Bold"
-                   HorizontalOptions="Center" FontSize="17" />
-            <Label Text="Présentez ce QR code au commerçant lors du retrait." Style="{StaticResource Muted}" HorizontalTextAlignment="Center" />
+            <Label Text="{Binding Code, StringFormat='Code de retrait : {0}'}" Style="{StaticResource Muted}" FontSize="12"
+                   HorizontalOptions="Center" Margin="0,6,0,0" />
 
-            <Border Style="{StaticResource Card}" Padding="18">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="{Binding Shop, StringFormat='🏪 {0}'}" Style="{StaticResource Body}" FontAttributes="Bold" FontSize="17" />
-                    <Label Text="{Binding Pickup, StringFormat='🕒 Retrait : {0}'}" Style="{StaticResource Body}" FontAttributes="Bold" />
-                    <Label Text="{Binding Address, StringFormat='📍 {0}'}" Style="{StaticResource Body}" FontAttributes="Bold" />
-                    <Label Text="{Binding Total, StringFormat='💰 À payer sur place : {0:N0} FCFA'}" Style="{StaticResource Body}" FontAttributes="Bold" />
+            <Border Style="{StaticResource GrayCard}" Padding="24,18" Margin="0,22,0,0">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="{Binding Headline}" Style="{StaticResource Body}" FontAttributes="Bold" FontSize="17" />
+                    <Label Text="{Binding PickupShort, StringFormat='Retrait {0}'}" Style="{StaticResource Body}" FontAttributes="Bold" FontSize="17" />
+                    <Label Text="{Binding Address}" Style="{StaticResource Body}" FontAttributes="Bold" FontSize="17" />
                 </VerticalStackLayout>
             </Border>
 
+            <Label Text="{Binding PaymentText}" Style="{StaticResource Body}" FontSize="13" HorizontalOptions="Center" Margin="0,14,0,0" />
+            <Button Text="💳 Payer maintenant (Mobile Money)" Style="{StaticResource PrimaryButton}" FontSize="15" HeightRequest="46"
+                    IsVisible="{Binding CanPay}" Margin="24,8,24,0" Clicked="OnPay" />
+
             <Button Text="Voir l'itinéraire" BackgroundColor="{StaticResource Leaf}" TextColor="White" FontAttributes="Bold"
-                    FontSize="17" CornerRadius="10" HeightRequest="50" Clicked="OnRoute" />
-            <Button Text="Mes réservations" Style="{StaticResource SoftButton}" Clicked="OnMyReservations" />
+                    FontSize="18" CornerRadius="8" HeightRequest="46" Margin="24,28,24,0" Clicked="OnRoute" />
+            <Button Text="Mes réservations" Style="{StaticResource SoftButton}" FontSize="18" CornerRadius="8" HeightRequest="46"
+                    Margin="40,18,40,0" Clicked="OnMyReservations" />
+            <Button x:Name="ReviewBtn" Text="⭐ Noter ce commerce" Style="{StaticResource SoftButton}" FontSize="14" HeightRequest="44"
+                    IsVisible="False" Margin="40,12,40,0" Clicked="OnReview" />
+            <Button x:Name="CancelBtn" Text="Annuler la réservation" BackgroundColor="Transparent" TextColor="#D32F2F"
+                    FontSize="13" Margin="0,10,0,0" Clicked="OnCancel" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

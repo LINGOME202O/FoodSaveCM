@@ -3,10 +3,11 @@
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <VerticalStackLayout Spacing="6">
-        <Label x:Name="Lbl" Style="{StaticResource Body}" FontSize="15" />
-        <Border Style="{StaticResource FieldBorder}">
+        <Label x:Name="Lbl" Style="{StaticResource Body}" FontSize="16" />
+        <Border x:Name="Box" Style="{StaticResource FieldBorder}">
             <Grid ColumnDefinitions="*,Auto">
-                <Entry x:Name="Input" BackgroundColor="Transparent" FontSize="14" Margin="8,0,0,0"
+                <Entry x:Name="Input" BackgroundColor="Transparent" FontSize="14" Margin="6,0"
+                       PlaceholderColor="#A8A8AD" HorizontalTextAlignment="Center"
                        TextChanged="OnTextChanged"
                        TextColor="{AppThemeBinding Light=Black, Dark=White}" />
                 <Label x:Name="Eye" Grid.Column="1" Text="👁" FontSize="18" IsVisible="False"

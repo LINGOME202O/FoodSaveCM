@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="FoodSaveCM.Pages.ValidatePickupPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Valider un retrait" Style="{StaticResource PageStyle}">
+    <ScrollView>
+        <VerticalStackLayout Padding="26,20" Spacing="14">
+            <Label Text="Valider un retrait" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Espace commerçant : scannez le QR code du client ou saisissez son code de retrait (ex : FS-482915)."
+                   FontSize="13" TextColor="Gray" HorizontalTextAlignment="Center" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,6,0,0">
+                <Button Text="📷 Scanner (caméra)" Style="{StaticResource SoftButton}" FontSize="13" HeightRequest="48" Clicked="OnScanCamera" />
+                <Button Grid.Column="1" Text="🖼 Depuis la galerie" Style="{StaticResource SoftButton}" FontSize="13" HeightRequest="48" Clicked="OnScanGallery" />
+            </Grid>
+
+            <Border Style="{StaticResource FieldBorder}">
+                <Entry x:Name="CodeEntry" Placeholder="FS-000000" HorizontalTextAlignment="Center"
+                       BackgroundColor="Transparent" Margin="6,0" Completed="OnValidate" />
+            </Border>
+
+            <Button Text="Valider le retrait" Style="{StaticResource PrimaryButton}" Clicked="OnValidate" />
+
+            <Border x:Name="ResultBox" IsVisible="False" Style="{StaticResource Card}">
+                <Label x:Name="ResultLabel" FontSize="15" HorizontalTextAlignment="Center" />
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

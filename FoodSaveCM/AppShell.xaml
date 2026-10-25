@@ -4,28 +4,32 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:pages="clr-namespace:FoodSaveCM.Pages"
        FlyoutBehavior="Disabled"
-       Shell.TabBarBackgroundColor="{AppThemeBinding Light=#E5E5EA, Dark=#1C1C1E}"
-       Shell.TabBarForegroundColor="{StaticResource Brand}"
-       Shell.TabBarTitleColor="{StaticResource Brand}"
-       Shell.TabBarUnselectedColor="Gray">
+       Shell.TabBarIsVisible="False">
 
     <ShellContent Route="login" ContentTemplate="{DataTemplate pages:LoginPage}" />
     <ShellContent Route="register" ContentTemplate="{DataTemplate pages:RegisterPage}" />
 
+    <ShellContent Route="onboarding" ContentTemplate="{DataTemplate pages:OnboardingPage}" />
+
     <TabBar Route="main">
-        <Tab Title="Accueil" Route="home" Icon="tab_accueil.png">
+        <Tab Title="Accueil" Route="home">
+            <Tab.Icon><FontImageSource Glyph="🏠" Size="22" /></Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" />
         </Tab>
-        <Tab Title="Boutique" Route="boutique" Icon="tab_boutique.png">
+        <Tab Title="Boutique" Route="boutique">
+            <Tab.Icon><FontImageSource Glyph="🛍" Size="22" /></Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:BoutiquePage}" />
         </Tab>
-        <Tab Title="Carte" Route="cart" Icon="tab_carte.png">
+        <Tab Title="Carte" Route="cart">
+            <Tab.Icon><FontImageSource Glyph="🛒" Size="22" /></Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:CartPage}" />
         </Tab>
-        <Tab Title="Favoris" Route="favoris" Icon="tab_favoris.png">
+        <Tab Title="Favoris" Route="favoris">
+            <Tab.Icon><FontImageSource Glyph="🤍" Size="22" /></Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:FavorisPage}" />
         </Tab>
-        <Tab Title="Profil" Route="profil" Icon="tab_profil.png">
+        <Tab Title="Profil" Route="profil">
+            <Tab.Icon><FontImageSource Glyph="👤" Size="22" /></Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" />
         </Tab>
     </TabBar>

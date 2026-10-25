@@ -17,9 +17,13 @@ public partial class DetailPage : ContentPage
             BindingContext = _p;
             if (_p != null)
             {
-                Title = _p.IsBasket ? "Détail du panier" : "Détail du produit";
+                Title = "Détail";
                 ContentsBox.IsVisible = _p.Contents.Count > 0;
+                SectionTitle.Text = _p.IsBasket ? "Contenu du panier" : "Description";
+                ReserveBtn.Text = _p.IsBasket ? "Réserver ce panier" : "Réserver ce produit";
                 UpdateCountdown();
+                var (avg, count) = AppState.ShopRating(_p.Shop);
+                RatingLabel.Text = count == 0 ? "Pas encore d'avis" : $"⭐ {avg:0.0}/5 ({count} avis) · {_p.Shop}";
             }
         }
     }

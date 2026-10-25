@@ -4,15 +4,20 @@ namespace FoodSaveCM.Pages;
 
 public partial class HomePage : ContentPage
 {
-    string _cat = "Fruits";
+    string _cat = "";   // "" = aucune catégorie sélectionnée
     string _query = "";
     int _sort = 0;
 
-    static readonly (string Name, string Icon)[] Cats =
+    // (Libellé affiché, catégorie interne, icône)
+    static readonly (string Label, string Cat, string Icon)[] Cats =
     {
-        ("Fruits", "🍎"), ("Légumes", "🥬"),
-        ("Croissant", "🥐"), ("Boisson", "🥤"), ("Paniers", "🧺")
+        ("Fruits", "Fruits", "🍎"),
+        ("Legumes", "Légumes", "🥬"),
+        ("Croissant", "Croissant", "🥐"),
+        ("Boisson", "Boisson", "🥤"),
     };
+
+    static bool _alerted;
 
     public HomePage()
     {
@@ -23,28 +28,36 @@ public partial class HomePage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        Hello.Text = $"Bonjour, {AppState.FirstName}";
+        Hello.Text = $"Bonjour,{AppState.FirstName}";
         Refresh();
+
+        // Alerte "dernière chance" (une seule fois par session, si les alertes sont activées)
+        if (!_alerted && AppState.Notifications && AppState.IsLoggedIn)
+        {
+            _alerted = true;
+            var n = AppState.EndingSoonCount;
+            if (n > 0) _ = Ui.Show($"⏳ Dernière chance : {n} offre(s) se terminent dans moins de 2h !");
+        }
     }
 
     void BuildChips()
     {
         Chips.Children.Clear();
-        foreach (var (name, icon) in Cats)
+        foreach (var (label, cat, icon) in Cats)
         {
-            var selected = name == _cat;
-            var btn = new Button
+            var selected = cat == _cat;
+            var chip = new Border
             {
-                Text = $"{icon} {name}",
-                FontSize = 13,
-                HeightRequest = 38,
-                CornerRadius = 19,
-                Padding = new Thickness(14, 0),
-                BackgroundColor = selected ? Color.FromArgb("#009B4D") : Color.FromArgb("#E8F8EC"),
-                TextColor = selected ? Colors.White : Color.FromArgb("#1B5E20")
+                Style = (Style)Application.Current!.Resources["Chip"],
+                Padding = new Thickness(10, 5),
+                BackgroundColor = selected ? Color.FromArgb("#9FE3B5") : Color.FromArgb("#E6F7E9"),
+                Content = new Label { Text = $"{icon} {label}", FontSize = 13, TextColor = Colors.Black, VerticalOptions = LayoutOptions.Center }
             };
-            btn.Clicked += (_, _) => { _cat = name; BuildChips(); Refresh(); };
-            Chips.Children.Add(btn);
+            var tap = new TapGestureRecognizer();
+            var c = cat;
+            tap.Tapped += (_, _) => { _cat = _cat == c ? "" : c; BuildChips(); Refresh(); };
+            chip.GestureRecognizers.Add(tap);
+            Chips.Children.Add(chip);
         }
     }
 
@@ -52,7 +65,7 @@ public partial class HomePage : ContentPage
     {
         var items = AppState.Products.Where(p =>
             p.Stock > 0 &&
-            (_cat == "Fruits" || p.Category == _cat || (_cat == "Paniers" && p.IsBasket)) &&
+            (_cat == "" ? !p.IsBasket : p.Category == _cat) &&
             (string.IsNullOrWhiteSpace(_query) ||
              p.Name.Contains(_query, StringComparison.OrdinalIgnoreCase) ||
              p.Shop.Contains(_query, StringComparison.OrdinalIgnoreCase)));
@@ -62,14 +75,14 @@ public partial class HomePage : ContentPage
 
     void OnSearch(object? sender, TextChangedEventArgs e) { _query = e.NewTextValue ?? ""; Refresh(); }
 
-    async void OnFilter(object? sender, EventArgs e)
+    async void OnFilter(object? sender, TappedEventArgs e)
     {
         var choice = await DisplayActionSheet("Trier par", "Annuler", null, AppState.SortLabels);
         var idx = Array.IndexOf(AppState.SortLabels, choice);
         if (idx >= 0) { _sort = idx; Refresh(); }
     }
 
-    void OnAllCategories(object? sender, TappedEventArgs e) { _cat = "Fruits"; BuildChips(); Refresh(); }
+    void OnAllCategories(object? sender, TappedEventArgs e) { _cat = ""; BuildChips(); Refresh(); }
 
     async void OnSeeAll(object? sender, TappedEventArgs e) => await Shell.Current.GoToAsync("//main/boutique");
 }

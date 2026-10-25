@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="FoodSaveCM.Pages.PaymentPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Paiement" Style="{StaticResource PageStyle}">
+    <ScrollView>
+        <VerticalStackLayout Padding="26,16" Spacing="14">
+            <Label Text="Paiement Mobile Money" FontSize="26" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="{Binding Headline}" FontAttributes="Bold" FontSize="17" />
+                    <Label Text="{Binding Total, StringFormat='Montant à payer : {0:0} FCFA'}" FontSize="15" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Moyen de paiement" FontAttributes="Bold" FontSize="16" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button x:Name="OrangeBtn" Text="🟠 Orange Money" Clicked="OnOrange" HeightRequest="50" CornerRadius="10" FontSize="14" />
+                <Button x:Name="MtnBtn" Grid.Column="1" Text="🟡 MTN MoMo" Clicked="OnMtn" HeightRequest="50" CornerRadius="10" FontSize="14" />
+            </Grid>
+
+            <Label Text="Numéro de téléphone" FontSize="15" />
+            <Border Style="{StaticResource FieldBorder}">
+                <Entry x:Name="PhoneEntry" Placeholder="6XX XXX XXX" Keyboard="Telephone" MaxLength="13"
+                       BackgroundColor="Transparent" Margin="10,0" />
+            </Border>
+
+            <Label Text="Code secret (PIN)" FontSize="15" />
+            <Border Style="{StaticResource FieldBorder}">
+                <Entry x:Name="PinEntry" Placeholder="••••" IsPassword="True" Keyboard="Numeric" MaxLength="5"
+                       BackgroundColor="Transparent" Margin="10,0" />
+            </Border>
+
+            <Label x:Name="ErrorLabel" TextColor="#D32F2F" FontSize="13" IsVisible="False" HorizontalTextAlignment="Center" />
+            <ActivityIndicator x:Name="Busy" IsRunning="False" IsVisible="False" Color="#009B4D" />
+
+            <Button x:Name="PayBtn" Text="Payer" Style="{StaticResource PrimaryButton}" Clicked="OnPay" />
+
+            <Label Text="Paiement simulé : aucun argent réel n'est débité. (Test d'échec : PIN 0000 = solde insuffisant.)"
+                   FontSize="11" TextColor="Gray" HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

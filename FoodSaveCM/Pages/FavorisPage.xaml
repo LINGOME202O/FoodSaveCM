@@ -5,9 +5,9 @@
              xmlns:ctrl="clr-namespace:FoodSaveCM.Controls"
              Shell.NavBarIsVisible="False" Title="Favoris"
              Style="{StaticResource PageStyle}">
-    <Grid RowDefinitions="Auto,*" Padding="16,12,16,0">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="16,12,8,0">
         <Label Text="Mes favoris ❤️" Style="{StaticResource BigTitle}" FontSize="30" Margin="0,0,0,8" />
-        <CollectionView x:Name="List" Grid.Row="1">
+        <CollectionView x:Name="List" Grid.Row="1" ItemSizingStrategy="MeasureFirstItem">
             <CollectionView.ItemTemplate>
                 <DataTemplate><ctrl:ProductCard /></DataTemplate>
             </CollectionView.ItemTemplate>
@@ -20,5 +20,6 @@
                 </VerticalStackLayout>
             </CollectionView.EmptyView>
         </CollectionView>
+        <ctrl:NavBar Grid.Row="2" Current="Favoris" />
     </Grid>
 </ContentPage>

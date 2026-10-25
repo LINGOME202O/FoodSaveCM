@@ -1,4 +1,3 @@
-// Phase C - Logique QR et gestion etat anti-gaspillage
 using QRCoder;
 
 namespace FoodSaveCM.Services;

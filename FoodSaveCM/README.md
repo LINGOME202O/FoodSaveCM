@@ -1,40 +1,42 @@
-# FoodSaveCM – Front-end .NET MAUI
+# 🍀 FoodSaveCM
 
-## 1. Créer le projet
-1. Visual Studio 20226 → **Créer un projet** → **Application .NET MAUI** → nom **`FoodSaveCM`** (le nom doit être exactement celui-ci, c'est le namespace utilisé).
-2. Choisissez **.NET 10** (recommandé).
-3. **Supprimez** du projet généré par défaut : `MainPage.xaml` et `MainPage.xaml.cs`.
-4. **Modifiez les fichiers** (remplacer les fichiers existants) :
-   `App.xaml`, `App.xaml.cs`, `AppShell.xaml`, `AppShell.xaml.cs`, `MauiProgram.cs`,
-   et créez les dossiers `Models/`, `Services/`, `Controls/`, `Pages/`.
-5. Mettez les images de `Resources/Images/` dans le dossier du même nom
-   (pain.jpg, tomate.jpg, avocat.jpg, yaourt.jpg, profil.jpg).
-
-## 2. Packages NuGet (clic droit projet → Gérer les packages NuGet)
-- `CommunityToolkit.Maui` **9.1.1** (pour .NET 8)  — toasts
-- `QRCoder` **1.4.3**                               — génération des QR codes
-
-(Si vous êtes en .NET 9 : prenez `CommunityToolkit.Maui` 12.x ; si une erreur de version apparaît, laissez NuGet proposer la version compatible.)
-
-## 3. Si vous utilisez .NET 9
-Dans `App.xaml.cs`, remplacez `MainPage = new AppShell();` par :
-```csharp
-protected override Window CreateWindow(IActivationState? activationState) => new Window(new AppShell());
-```
-
-## 4. Android – permissions (Platforms/Android/AndroidManifest.xml)
-```xml
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
-```
-
-## 5. Compte de test
-`landry@email.com` / `123456`  (ou créez un compte via « S'inscrire »)
+Application mobile **.NET MAUI** de lutte contre le gaspillage alimentaire à Douala : les restaurants,
+boulangeries et marchés publient leurs invendus à prix réduit, les clients proches les réservent et les retirent avec un QR code.
 
 ## Fonctionnalités
-Connexion/Inscription (validation) · Accueil (recherche, catégories, tri) · Boutique (paniers) ·
-Détail (compte à rebours du retrait, partage, itinéraire) · Panier (quantités) · Favoris (persistants) ·
-Réservation + QR code + code de retrait · Mes réservations (À venir / Passées / Annulées, annulation) ·
-Publier un invendu (photo, calcul de la réduction) · Mes publications (glisser pour supprimer) ·
-Carte des commerces · Profil (impact écologique, mode sombre, alertes, déconnexion).
+**Client**
+- Inscription / connexion sécurisée (mots de passe chiffrés PBKDF2), mot de passe oublié par code
+- Accueil avec recherche, catégories et tri ; boutique de paniers anti-gaspi
+- Détail d'un panier : contenu, créneau de retrait, compte à rebours, note du commerce, partage, itinéraire
+- Panier, favoris, réservation avec **QR code** et code de retrait unique
+- **Paiement Mobile Money (simulé)** : Orange Money / MTN MoMo
+- Mes réservations (à venir, passées, annulées), annulation avec remise en stock
+- Avis et notes (1 à 5 étoiles) sur les commerces
+- Impact écologique (repas sauvés, CO₂ évité, économies), mode sombre, alertes « dernière chance »
+
+**Commerçant**
+- Publication d'un invendu (photo, prix, réduction, créneau) et gestion de ses publications
+- **Validation d'un retrait** par scan du QR code (caméra / galerie) ou saisie du code
+- **Tableau de bord** : réservations, chiffre d'affaires, paiements en ligne, produits les plus réservés, note moyenne
+
+## Architecture
+```
+Pages/      Écrans (XAML + code-behind) : Login, Home, Detail, Cart, Payment, Dashboard...
+Controls/   Composants réutilisables : Field, ProductCard, NavBar
+Models/     Modèles d'affichage (Product, Reservation, CartItem) + tables SQLite (Entities.cs)
+Services/   AppState (logique métier + accès base), DatabaseService (SQLite), QrScanner, QrHelper
+Resources/  Images et styles
+```
+Back end local : **SQLite** (sqlite-net-pcl) avec tables Users, Products, Reservations, Carts, Favorites, Payments, Reviews.
+
+## Technologies
+.NET MAUI (.NET 10) · SQLite · CommunityToolkit.Maui · QRCoder (génération) · ZXing.Net + SkiaSharp (lecture QR)
+
+## Lancer le projet
+1. Visual Studio 2026 avec la charge de travail « Développement d'applications mobiles avec .NET »
+2. Restaurer les packages NuGet, puis lancer sur Android (émulateur ou téléphone) ou Windows
+3. Compte de démonstration : `landry@email.com` / `123456`
+
+## Limites et évolutions
+Les données sont stockées sur l'appareil. Évolution prévue : API ASP.NET Core pour partager les données entre commerçants et clients,
+paiement Mobile Money réel via un opérateur, envoi d'emails réels.

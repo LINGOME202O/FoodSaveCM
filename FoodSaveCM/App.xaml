@@ -11,7 +11,7 @@
 
             <Color x:Key="Brand">#009B4D</Color>
             <Color x:Key="Leaf">#34C759</Color>
-            <Color x:Key="SoftGreen">#E8F8EC</Color>
+            <Color x:Key="SoftGreen">#E6F7E9</Color>
 
             <Style x:Key="PageStyle" TargetType="ContentPage">
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#121212}" />
@@ -55,6 +55,14 @@
                 <Setter Property="HeightRequest" Value="48" />
                 <Setter Property="StrokeShape">
                     <Setter.Value><RoundRectangle CornerRadius="14" /></Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="GrayCard" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#D9D9D9, Dark=#3A3A3C}" />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="StrokeShape">
+                    <Setter.Value><RoundRectangle CornerRadius="12" /></Setter.Value>
                 </Setter>
             </Style>
 

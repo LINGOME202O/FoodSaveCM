@@ -2,9 +2,10 @@
 <ContentPage x:Class="FoodSaveCM.Pages.CartPage"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:FoodSaveCM.Controls"
              Shell.NavBarIsVisible="False" Title="Panier"
              Style="{StaticResource PageStyle}">
-    <Grid RowDefinitions="Auto,*,Auto" Padding="16,12">
+    <Grid RowDefinitions="Auto,*,Auto,Auto" Padding="16,12,16,0">
         <Label Text="Mon panier" Style="{StaticResource BigTitle}" FontSize="30" Margin="0,0,0,8" />
 
         <CollectionView x:Name="List" Grid.Row="1">
@@ -47,5 +48,6 @@
             </Grid>
             <Button Text="Réserver tout" Style="{StaticResource PrimaryButton}" Clicked="OnReserveAll" />
         </VerticalStackLayout>
+        <ctrl:NavBar Grid.Row="3" Current="Carte" />
     </Grid>
 </ContentPage>

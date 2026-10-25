@@ -35,8 +35,12 @@ public partial class ProfilePage : ContentPage
         await Ui.Show(e.Value ? "Alertes activées 🔔" : "Alertes désactivées");
     }
 
-    async void OnReservations(object? sender, EventArgs e) => await Shell.Current.GoToAsync("reservations");
-    async void OnPublications(object? sender, EventArgs e) => await Shell.Current.GoToAsync("publications");
+    async void OnReservations(object? sender, TappedEventArgs e) => await Shell.Current.GoToAsync("reservations");
+    async void OnPublications(object? sender, TappedEventArgs e) => await Shell.Current.GoToAsync("publications");
+    async void OnDashboard(object? sender, EventArgs e) => await Shell.Current.GoToAsync("dashboard");
+
+    async void OnValidate(object? sender, EventArgs e) => await Shell.Current.GoToAsync("validate");
+
     async void OnPublish(object? sender, EventArgs e) => await Shell.Current.GoToAsync("publish");
 
     async void OnLogout(object? sender, EventArgs e)

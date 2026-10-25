@@ -14,36 +14,27 @@ public partial class ReservationsPage : ContentPage
     void Refresh()
     {
         List.ItemsSource = AppState.Reservations.Where(r => r.Status == _status).ToList();
-        Style(TabUp, _status == ReservationStatus.Upcoming);
-        Style(TabPast, _status == ReservationStatus.Past);
-        Style(TabCancel, _status == ReservationStatus.Cancelled);
+        ApplyTab(TabUp, UnderUp, _status == ReservationStatus.Upcoming);
+        ApplyTab(TabPast, UnderPast, _status == ReservationStatus.Past);
+        ApplyTab(TabCancel, UnderCancel, _status == ReservationStatus.Cancelled);
     }
 
-    static void Style(Button b, bool selected)
+    // Onglet actif : fond transparent, texte vert, trait vert dessous.
+    // Onglets inactifs : fond gris, texte noir (comme la maquette).
+    static void ApplyTab(Button b, BoxView underline, bool selected)
     {
-        b.BackgroundColor = selected ? Color.FromArgb("#009B4D") : Color.FromArgb("#8E8E93");
-        b.TextColor = Colors.White;
-        b.FontAttributes = selected ? FontAttributes.Bold : FontAttributes.None;
+        b.BackgroundColor = selected ? Colors.Transparent : Color.FromArgb("#8C8C90");
+        b.TextColor = selected ? Color.FromArgb("#34C759") : Colors.Black;
+        underline.Color = selected ? Color.FromArgb("#34C759") : Colors.Transparent;
     }
 
     void OnTabUp(object? s, EventArgs e) { _status = ReservationStatus.Upcoming; Refresh(); }
     void OnTabPast(object? s, EventArgs e) { _status = ReservationStatus.Past; Refresh(); }
     void OnTabCancel(object? s, EventArgs e) { _status = ReservationStatus.Cancelled; Refresh(); }
 
-    async void OnShowQr(object? sender, EventArgs e)
+    async void OnShowQr(object? sender, TappedEventArgs e)
     {
-        if ((sender as Button)?.BindingContext is Reservation r)
+        if ((sender as BindableObject)?.BindingContext is Reservation r)
             await Shell.Current.GoToAsync($"confirmation?id={r.Id}");
-    }
-
-    async void OnCancel(object? sender, EventArgs e)
-    {
-        if ((sender as Button)?.BindingContext is not Reservation r) return;
-        if (await DisplayAlert("Annuler la réservation", $"Annuler votre réservation chez {r.Shop} ?", "Oui, annuler", "Non"))
-        {
-            AppState.Cancel(r);
-            Refresh();
-            await Ui.Show("Réservation annulée");
-        }
     }
 }

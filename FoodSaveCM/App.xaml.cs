@@ -10,8 +10,7 @@ public partial class App : Application
         UserAppTheme = AppState.DarkMode ? AppTheme.Dark : AppTheme.Light;
     }
 
+    // Compatible .NET 9 / .NET 10 (MAUI 9, 10.x)
     protected override Window CreateWindow(IActivationState? activationState)
-    {
-        return new Window(new AppShell());
-    }
+        => new Window(new AppShell());
 }

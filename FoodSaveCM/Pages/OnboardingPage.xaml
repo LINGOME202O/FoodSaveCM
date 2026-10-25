@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="FoodSaveCM.Pages.OnboardingPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="False" Title="Bienvenue" Style="{StaticResource PageStyle}">
+    <Grid RowDefinitions="Auto,*,Auto,Auto" Padding="26,20,26,26">
+        <Label Text="Passer" HorizontalOptions="End" TextColor="{StaticResource Leaf}" FontSize="16">
+            <Label.GestureRecognizers><TapGestureRecognizer Tapped="OnSkip" /></Label.GestureRecognizers>
+        </Label>
+
+        <CarouselView x:Name="Slides" Grid.Row="1" Loop="False" IndicatorView="Dots" PositionChanged="OnPositionChanged">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="18" Padding="10">
+                        <Label Text="{Binding Icon}" FontSize="90" HorizontalOptions="Center" />
+                        <Label Text="{Binding Title}" FontSize="26" FontAttributes="Bold" HorizontalTextAlignment="Center"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                        <Label Text="{Binding Text}" FontSize="15" HorizontalTextAlignment="Center" TextColor="Gray" />
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <IndicatorView x:Name="Dots" Grid.Row="2" IndicatorColor="LightGray" SelectedIndicatorColor="#009B4D"
+                       HorizontalOptions="Center" Margin="0,10" />
+        <Button x:Name="NextBtn" Grid.Row="3" Text="Suivant" Style="{StaticResource PrimaryButton}" Clicked="OnNext" />
+    </Grid>
+</ContentPage>

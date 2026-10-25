@@ -19,7 +19,8 @@ public partial class RegisterPage : ContentPage
         if (pass.Length < 6) { ShowError("Le mot de passe doit contenir au moins 6 caractères."); return; }
         if (pass != ConfirmField.Text) { ShowError("Les mots de passe ne correspondent pas."); return; }
 
-        AppState.Register(name, email, pass);
+        if (AppState.EmailExists(email)) { ShowError("Cet email est déjà utilisé."); return; }
+        if (!AppState.Register(name, email, pass)) { ShowError("Inscription impossible."); return; }
         await Ui.Show($"Bienvenue {AppState.FirstName} 🍀");
         await Shell.Current.GoToAsync("//main/home");
     }
